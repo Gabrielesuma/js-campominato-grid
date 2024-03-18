@@ -1,28 +1,30 @@
-let elButton = document.getElementById('button');
-let elSection = document.getElementById('grid');
+document.querySelector('button#play-button').addEventListener('click', function(){
+    const cellNum = parseInt(document.querySelector('play-select').value);
+    newGame(cellNum);
+});
 
-elButton.addEventListener('click', function(){
-    elSection.classList.toggle('d-none');
-})
+function newGame(numberOfSquares){
+    const grid = document.getElementById('grid');
+    grid.innerHTML = '';
 
-const elGrid = document.querySelector('section#grid');
+    for(i = 0; i < numberOfSquares; i++){
+        const newSquare = document.createElement('article');
+        newSquare.classList.add('square');
 
-for(let i = 0; i < 100; i++){
-    const newSquare = generateSquare(i + 1);
+        if(numberOfSquares === 81){
+            newSquare.classList.add('nine');
+        } else if(numberOfSquares === 49){
+            newSquare.classList.add('seven');
+        }
 
-    newSquare.addEventListener('click', function(){
-        newSquare.classList.toggle('clicked');
-        console.log(i +1);
-    })
-
-    elGrid.appendChild(newSquare);
-}
-
-function generateSquare(index){
-    const newElement = document.createElement('div');
-    newElement.innerHTML = `<span>${index}</span>`;
-    newElement.classList.add('square');
-    return newElement;
-}
-
-//<div class="square"></div>
+        newSquare.addEventListener('click', function(){
+            newSquare.classList.toggle('clicked');
+        });
+    
+        const spanContent = document.createElement('span');
+        spanContent.append(index);
+    
+        newSquare.appendChild(spanContent);
+        grid.appendChild(newSquare);
+    }
+};
